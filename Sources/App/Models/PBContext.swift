@@ -11,7 +11,7 @@ import MongoKitten
 
 
 public let database = try! Database("mongodb://sam:sam@ds133428.mlab.com:33428/heroku_dmnl45q2")
-public let userCollection = database["PBContext"]
+public let contextCollection = database["PBContext"]
 
 
 
@@ -25,7 +25,7 @@ final class PBContext{
         return ["_id": self._id,
                 "major": self.major,
                 "minor": self.minor,
-                "UUID": self.UUID
+                "uuid": self.UUID
         ]
     }
     
@@ -38,7 +38,7 @@ final class PBContext{
     
     func saveContext()  throws {
         
-        try userCollection.insert(document)
+        try contextCollection.insert(document)
         
     }
 }

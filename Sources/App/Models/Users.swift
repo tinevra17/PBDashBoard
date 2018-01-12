@@ -12,7 +12,7 @@ import MongoKitten
 
 
 //public let database = try! Database("mongodb://tinevra17:sam@ds249787.mlab.com:49787/projects")
-//public let userCollection = database["users"]
+public let userCollection = database["users"]
 
 
 
