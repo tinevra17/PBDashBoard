@@ -9,6 +9,24 @@ extension Droplet {
         get("sam") { req in
             let context: PBContext = PBContext(major: 22222, minor: 11111, uuid: "88888888-4444-4444-4444-111111111111")
             
+//            let cellData: JSON = JSON([{
+//                                    "title": "Cowork Oasis Conference Room",
+//                                    "type": "title",
+//                                    "description": "This is the Cowork Oasis conference room. To schedule, talk to staff or ask the owners to let me integrate into their system!"
+//                                    },
+//                                  {
+//                                    "type": "photoPager",
+//                                    "url": "https://coworkoasis.com",
+//                                    "images": [{
+//                                                "__type": "File",
+//                                                "url": "http://parabeac-dev.herokuapp.com/parse/files/parabeacDev/5472014bbea28a24cc190c2553b3e71b_file.bin",
+//                                                "name": "5472014bbea28a24cc190c2553b3e71b_file.bin"
+//                                                }]
+//                                    }])
+            
+            
+            
+            let contextInfo: PBContextInfo = PBContextInfo(type: "SVS", cellData: <#T##[JSON]#>)
             //let contextInfo: PBContextInfo
             
             return "sam added to the database!"
