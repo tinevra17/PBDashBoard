@@ -26,7 +26,7 @@ extension Droplet {
             
             
             
-            let contextInfo: PBContextInfo = PBContextInfo(type: "SVS", cellData: <#T##[JSON]#>)
+           // let contextInfo: PBContextInfo = PBContextInfo(type: "SVS", cellData: <#T##[JSON]#>)
             //let contextInfo: PBContextInfo
             
             return "sam added to the database!"

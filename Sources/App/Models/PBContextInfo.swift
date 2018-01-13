@@ -16,13 +16,12 @@ final class PBContextInfo{
     var _id: ObjectId
     var type: String
     var cellData: [JSON]
-    var _p_parentFacility: ObjectId
+    var _p_parentFacility: ObjectId?
 
     var document: Document{
         return ["_id": self._id,
-                "major": self.major,
-                "minor": self.minor,
-                "uuid": self.uuid
+                "type": self.type,
+                "cellData": self.cellData,
                 "_p_parentFacility": self._p_parentFacility
         ]
     }
@@ -40,23 +39,24 @@ final class PBContextInfo{
             let query: Query = "_id" == contextInfo
         
         
-            guard let DocumentInfo = try contextInfoCollection.findOne(query) else{
+            guard let documentInfo = try contextInfoCollection.findOne(query) else{
                 fatalError()
             }
         
-            guard let type = DocumentInfo.dictionaryRepresentation["type"] as? String,
-            let cellData = DocumentInfo.dictionaryRepresentation["cellData"] as? String,else{
+            guard let type = documentInfo.dictionaryRepresentation["type"] as? String,
+            let id1 = documentInfo.dictionaryRepresentation["_id"] as? ObjectId,
+            let cellData = documentInfo.dictionaryRepresentation["cellData"] as? [JSON] else{
                     fatalError()
             }
         
         
-            self._id = id
+            self._id = id1
             self.type = type
             self.cellData = cellData
             self._p_parentFacility = nil
     }
     
     func saveContextInfo()  throws {
-        try contexInfoCollection.insert(document)
+        try contextInfoCollection.insert(document)
     }
 }
