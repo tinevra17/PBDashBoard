@@ -10,61 +10,53 @@ import Vapor
 import MongoKitten
 
 
-public let contextInfoCollection = database["PBContext"]
+public let contextInfoCollection = database["PBContextInfo"]
 
 final class PBContextInfo{
     var _id: ObjectId
-    var major: Int
-    var minor: Int
-    var uuid: String
-    var _p_parentContextInfo: String
-    
+    var type: String
+    var cellData: [JSON]
+    var _p_parentFacility: ObjectId
+
     var document: Document{
         return ["_id": self._id,
                 "major": self.major,
                 "minor": self.minor,
                 "uuid": self.uuid
-            "_p_parentContextInfo": self._id
+                "_p_parentFacility": self._p_parentFacility
         ]
     }
     
-    init(major: Int, minor: Int, uuid: String) {
+    init(type: String, cellData: [JSON]) {
         self._id = ObjectId()
-        self.major = major
-        self.minor = minor
-        self.UUID = uuid
+        self.type = type
+        self.cellData = cellData
+        self._p_parentFacility = nil
     }
     
-    
-    init(major: Int, minor: Int, uuid: String) {
-        self._id = ObjectId()
-        self.major = major
-        self.minor = minor
-        self.uuid = uuid
-        self.uuid = ObjectId()?
-    }
-    
-    init(id: String)throws{
-            let context = try ObjectId(sid)
-            let query: Query = "_id" == context
+
+    init(id: String) throws{
+            let contextInfo = try ObjectId(id)
+            let query: Query = "_id" == contextInfo
         
         
-            guard let context = try contextCollection.findOne(query) else{
+            guard let DocumentInfo = try contextInfoCollection.findOne(query) else{
                 fatalError()
             }
         
-            guard let  = user.dictionaryRepresentation["userName"] as? String,
-                let email = user.dictionaryRepresentation["email"] as? String else{
+            guard let type = DocumentInfo.dictionaryRepresentation["type"] as? String,
+            let cellData = DocumentInfo.dictionaryRepresentation["cellData"] as? String,else{
                     fatalError()
             }
         
         
-            self.ID = objectID
-            self.userName = userName
-            self.email = email
+            self._id = id
+            self.type = type
+            self.cellData = cellData
+            self._p_parentFacility = nil
     }
     
-    func saveContext()  throws {
+    func saveContextInfo()  throws {
         try contexInfoCollection.insert(document)
     }
 }

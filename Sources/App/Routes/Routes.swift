@@ -7,14 +7,15 @@ extension Droplet {
         
         
         get("sam") { req in
-            let ivan: Users = Users(userName: "Sam", email: "sam@hotmail.com")
-            try ivan.save()
+            let context: PBContext = PBContext(major: 22222, minor: 11111, uuid: "88888888-4444-4444-4444-111111111111")
+            
+            //let contextInfo: PBContextInfo
             
             return "sam added to the database!"
         }
         
         get("context") { req in
-            let context: PBContext = PBContext(major: 11111, minor: 22222, UUID: "88888888-4444-4444-4444-111111111111")
+            let context: PBContext = PBContext(major: 11111, minor: 22222, uuid: "88888888-4444-4444-4444-111111111111")
             try context.saveContext()
             
             return "context added to the db"
